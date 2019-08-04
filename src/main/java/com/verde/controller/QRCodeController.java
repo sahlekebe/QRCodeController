@@ -7,18 +7,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.verde.service.QRGenerator;
+import com.verde.service.QRCodeManager;;
 
 @RestController
 public class QRCodeController {
 	@Autowired
-	private QRGenerator qrGenerator;
+	private QRCodeManager qrManager;
 
-	@GetMapping(path = "generateQRcode",produces= {MediaType.IMAGE_PNG_VALUE,MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(path = "generateQRcode", produces = { MediaType.IMAGE_PNG_VALUE, MediaType.APPLICATION_JSON_VALUE })
 	public @ResponseBody byte[] qrCodeGenerator() {
 
-		return qrGenerator.generateQrCode("First Test ሙከራ");
+		return qrManager.generateQRcode("First Test ሙከራ");
 	}
-	
 
+	@PostMapping(path = "decode")
+	public String decodeQRCode() {
+		return "";
+	}
 }

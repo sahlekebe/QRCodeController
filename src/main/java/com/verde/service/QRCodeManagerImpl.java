@@ -1,6 +1,6 @@
 package com.verde.service;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
@@ -15,23 +15,26 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 
 @Service
-public class QRCodeGeneratorImpl implements QRGenerator {
-	private static final Logger logger = LoggerFactory.getLogger(QRCodeGeneratorImpl.class);
+public class QRCodeManagerImpl implements QRCodeManager {
+	private static final Logger logger = LoggerFactory.getLogger(QRCodeManagerImpl.class);
 	private static final int WIDTH = 300;
 	private static final int HEIGHT = 300;
-	private Map<EncodeHintType, String> hints = new HashMap<>();
 
-	public QRCodeGeneratorImpl() {
-    hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+	private Map<EncodeHintType, String> hints;
+
+	public QRCodeManagerImpl() {
+		hints = new EnumMap<>(EncodeHintType.class);
+
+		hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
 	}
 
 	@Override
-	public byte[] generateQrCode(String payload) {
+	public byte[] generateQRcode(String payload) {
 
 		QRCodeWriter qrCodeWriter = new QRCodeWriter();
 		try {
 
-			BitMatrix bitMatrix = qrCodeWriter.encode(payload, BarcodeFormat.QR_CODE, WIDTH, HEIGHT,hints);
+			BitMatrix bitMatrix = qrCodeWriter.encode(payload, BarcodeFormat.QR_CODE, WIDTH, HEIGHT, hints);
 			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			MatrixToImageWriter.writeToStream(bitMatrix, "png", outputStream);
 
@@ -43,6 +46,18 @@ public class QRCodeGeneratorImpl implements QRGenerator {
 		}
 
 		return new byte[0];
+	}
+
+	@Override
+	public byte[] generateQRcode(String payload) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String decodeQRcode(byte[] qrcode) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
