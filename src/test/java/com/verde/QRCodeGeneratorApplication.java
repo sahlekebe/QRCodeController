@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CouchbaseDataSet1ApplicationTests {
+public class QRCodeGeneratorApplication {
 
 	@Test
 	public void contextLoads() {
