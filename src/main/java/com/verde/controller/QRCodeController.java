@@ -16,9 +16,9 @@ public class QRCodeController {
 	private QRCodeManager qrManager;
 
 	@GetMapping(path = "generateQRcode", produces = { MediaType.IMAGE_PNG_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody byte[] qrCodeGenerator() {
+	public @ResponseBody byte[] qrCodeGenerator(String content) {
 
-		return qrManager.generateQRcode("First Test ሙከራ");
+		return qrManager.generateQRcode(content);
 	}
 
 	@PostMapping(path = "decode")
